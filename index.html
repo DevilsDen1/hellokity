@@ -12,85 +12,39 @@
         }
 
         body {
-            background: radial-gradient(circle at 20% 50%, #ff1493 0%, transparent 50%),
-                        radial-gradient(circle at 80% 50%, #00bfff 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, #ffd700 0%, transparent 50%),
-                        radial-gradient(circle at 60% 80%, #32cd32 0%, transparent 50%),
-                        radial-gradient(circle at 30% 70%, #9370db 0%, transparent 50%),
-                        linear-gradient(45deg, #ff69b4, #ffc0cb, #ffb6c1, #dda0dd);
-            background-size: 400% 400%, 400% 400%, 400% 400%, 400% 400%, 400% 400%, 200% 200%;
-            animation: cosmicWave 6s ease-in-out infinite, backgroundShift 10s linear infinite;
+            background: linear-gradient(45deg, #ff69b4, #ffc0cb, #ffb6c1, #dda0dd);
+            background-size: 200% 200%;
+            animation: backgroundShift 15s linear infinite;
             min-height: 100vh;
             overflow: hidden;
             font-family: 'Courier New', monospace;
             perspective: 1000px;
         }
 
-        @keyframes cosmicWave {
-            0%, 100% { background-position: 0% 50%, 100% 50%, 50% 0%, 50% 100%, 0% 0%, 0% 0%; }
-            25% { background-position: 50% 0%, 50% 100%, 100% 50%, 0% 50%, 50% 50%, 25% 25%; }
-            50% { background-position: 100% 50%, 0% 50%, 50% 100%, 50% 0%, 100% 100%, 50% 50%; }
-            75% { background-position: 50% 100%, 50% 0%, 0% 50%, 100% 50%, 50% 0%, 75% 75%; }
-        }
-
         @keyframes backgroundShift {
-            0% { filter: hue-rotate(0deg) saturate(1) brightness(1); }
-            25% { filter: hue-rotate(90deg) saturate(1.5) brightness(1.2); }
-            50% { filter: hue-rotate(180deg) saturate(2) brightness(0.8); }
-            75% { filter: hue-rotate(270deg) saturate(1.5) brightness(1.2); }
-            100% { filter: hue-rotate(360deg) saturate(1) brightness(1); }
+            0% { background-position: 0% 0%; filter: hue-rotate(0deg); }
+            50% { background-position: 100% 100%; filter: hue-rotate(180deg); }
+            100% { background-position: 0% 0%; filter: hue-rotate(360deg); }
         }
 
         .pixel-hello-kitty {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
-            width: 250px;
-            height: 250px;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
             z-index: 10;
-            animation: kitty3D 8s ease-in-out infinite, kittyGlow 3s ease-in-out infinite;
-            transform-style: preserve-3d;
+            animation: kittyFloat 6s ease-in-out infinite;
+            will-change: transform;
         }
 
-        @keyframes kitty3D {
-            0% { 
-                transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1);
-            }
-            25% { 
-                transform: translate(-50%, -60%) rotateX(15deg) rotateY(90deg) rotateZ(5deg) scale(1.1);
+        @keyframes kittyFloat {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
             }
             50% { 
-                transform: translate(-50%, -40%) rotateX(-10deg) rotateY(180deg) rotateZ(-5deg) scale(1.2);
-            }
-            75% { 
-                transform: translate(-50%, -55%) rotateX(10deg) rotateY(270deg) rotateZ(10deg) scale(1.05);
-            }
-            100% { 
-                transform: translate(-50%, -50%) rotateX(0deg) rotateY(360deg) rotateZ(0deg) scale(1);
-            }
-        }
-
-        @keyframes kittyGlow {
-            0% { 
-                filter: drop-shadow(0 0 30px #ff1493) drop-shadow(0 0 60px #ff69b4) drop-shadow(0 0 90px #ffc0cb);
-                box-shadow: 0 0 100px rgba(255, 20, 147, 0.8);
-            }
-            20% { 
-                filter: drop-shadow(0 0 30px #00bfff) drop-shadow(0 0 60px #87ceeb) drop-shadow(0 0 90px #e0f6ff);
-                box-shadow: 0 0 100px rgba(0, 191, 255, 0.8);
-            }
-            40% { 
-                filter: drop-shadow(0 0 30px #ffd700) drop-shadow(0 0 60px #ffff00) drop-shadow(0 0 90px #fffacd);
-                box-shadow: 0 0 100px rgba(255, 215, 0, 0.8);
-            }
-            60% { 
-                filter: drop-shadow(0 0 30px #32cd32) drop-shadow(0 0 60px #98fb98) drop-shadow(0 0 90px #f0fff0);
-                box-shadow: 0 0 100px rgba(50, 205, 50, 0.8);
-            }
-            80% { 
-                filter: drop-shadow(0 0 30px #9370db) drop-shadow(0 0 60px #dda0dd) drop-shadow(0 0 90px #f8f8ff);
-                box-shadow: 0 0 100px rgba(147, 112, 219, 0.8);
+                transform: translate(-50%, -60%) scale(1.05);
             }
         }
 
@@ -100,52 +54,13 @@
             grid-template-rows: repeat(20, 1fr);
             width: 100%;
             height: 100%;
-            gap: 2px;
-            transform-style: preserve-3d;
+            gap: 1px;
         }
 
         .pixel {
-            border-radius: 30%;
-            transition: all 0.3s ease;
-            animation: pixelDance 2s ease-in-out infinite;
-            position: relative;
-            box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        .pixel::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            border-radius: 30%;
-            animation: pixelShine 1.5s ease-in-out infinite;
-        }
-
-        @keyframes pixelDance {
-            0%, 100% { 
-                transform: scale(1) rotateZ(0deg);
-                opacity: 1;
-            }
-            25% { 
-                transform: scale(1.1) rotateZ(5deg);
-                opacity: 0.9;
-            }
-            50% { 
-                transform: scale(0.9) rotateZ(-5deg);
-                opacity: 0.8;
-            }
-            75% { 
-                transform: scale(1.05) rotateZ(3deg);
-                opacity: 0.95;
-            }
-        }
-
-        @keyframes pixelShine {
-            0%, 100% { opacity: 0; transform: translateX(-100%); }
-            50% { opacity: 1; transform: translateX(100%); }
+            border-radius: 20%;
+            transition: all 0.2s ease;
+            will-change: transform;
         }
 
         .cosmic-particles {
@@ -160,15 +75,15 @@
 
         .particle {
             position: absolute;
-            background: radial-gradient(circle, #fff, transparent);
+            background: #fff;
             border-radius: 50%;
-            animation: particleFloat 4s linear infinite;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            animation: particleFloat 3s linear infinite;
+            will-change: transform;
         }
 
         @keyframes particleFloat {
             0% {
-                transform: translateY(100vh) translateX(0) scale(0) rotate(0deg);
+                transform: translateY(100vh) scale(0);
                 opacity: 0;
             }
             10% {
@@ -179,69 +94,58 @@
                 opacity: 1;
             }
             100% {
-                transform: translateY(-10vh) translateX(200px) scale(0) rotate(360deg);
+                transform: translateY(-10vh) scale(0);
                 opacity: 0;
             }
         }
 
         .flower-storm {
             position: absolute;
-            font-size: 3rem;
-            animation: stormSpin 5s ease-in-out infinite;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-            filter: drop-shadow(0 0 10px currentColor);
+            font-size: 2rem;
+            animation: stormFloat 4s ease-in-out infinite;
+            will-change: transform;
         }
 
-        @keyframes stormSpin {
+        @keyframes stormFloat {
             0% {
-                transform: translateY(120vh) rotate(0deg) scale(0.3);
+                transform: translateY(120vh) scale(0.5);
                 opacity: 0;
             }
-            10% {
+            20% {
                 opacity: 1;
                 transform: scale(1);
             }
-            50% {
-                transform: translateY(50vh) rotate(180deg) scale(1.2);
-                opacity: 1;
-            }
-            90% {
+            80% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(-20vh) rotate(360deg) scale(0.3);
+                transform: translateY(-20vh) scale(0.5);
                 opacity: 0;
             }
         }
 
         .energy-beam {
             position: absolute;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #fff, #ff1493, #00bfff, #ffd700, transparent);
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
             border-radius: 50px;
-            animation: beamSweep 2s linear infinite;
-            box-shadow: 0 0 20px currentColor;
+            animation: beamSweep 3s linear infinite;
+            will-change: width;
         }
 
         @keyframes beamSweep {
             0% {
                 width: 0;
-                left: 0;
                 opacity: 0;
             }
-            10% {
+            20% {
                 opacity: 1;
             }
-            50% {
-                width: 100vw;
-                opacity: 1;
-            }
-            90% {
+            80% {
                 opacity: 1;
             }
             100% {
-                width: 0;
-                left: 100%;
+                width: 100vw;
                 opacity: 0;
             }
         }
@@ -252,11 +156,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            border: 15px solid transparent;
-            border-image: linear-gradient(45deg, 
-                #ff1493, #00bfff, #ffd700, #32cd32, #9370db, 
-                #ff69b4, #87ceeb, #ffff00, #98fb98, #dda0dd) 1;
-            animation: holoBorder 3s ease-in-out infinite;
+            border: 8px solid transparent;
+            border-image: linear-gradient(45deg, #ff1493, #00bfff, #ffd700, #32cd32) 1;
+            animation: holoBorder 4s ease-in-out infinite;
             pointer-events: none;
             z-index: 15;
         }
@@ -264,56 +166,23 @@
         @keyframes holoBorder {
             0%, 100% { 
                 border-width: 5px;
-                filter: blur(0px) brightness(1);
-            }
-            25% { 
-                border-width: 20px;
-                filter: blur(2px) brightness(1.5);
+                opacity: 0.5;
             }
             50% { 
-                border-width: 35px;
-                filter: blur(1px) brightness(2);
-            }
-            75% { 
-                border-width: 25px;
-                filter: blur(3px) brightness(1.2);
-            }
-        }
-
-        .dimensional-rift {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: conic-gradient(#ff1493, #00bfff, #ffd700, #32cd32, #9370db, #ff1493);
-            animation: riftSpin 6s linear infinite, riftPulse 3s ease-in-out infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes riftSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes riftPulse {
-            0%, 100% { 
-                transform: scale(0.5);
-                opacity: 0.1;
-            }
-            50% { 
-                transform: scale(1.5);
-                opacity: 0.4;
+                border-width: 12px;
+                opacity: 0.8;
             }
         }
 
         .magic-aura {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
             border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: auraExpand 4s ease-out infinite;
+            animation: auraExpand 3s ease-out infinite;
+            will-change: transform;
         }
 
         @keyframes auraExpand {
@@ -322,71 +191,65 @@
                 opacity: 1;
             }
             100% {
-                transform: scale(8);
+                transform: scale(6);
                 opacity: 0;
             }
         }
 
         .meteor-shower {
             position: absolute;
-            width: 3px;
-            height: 100px;
+            width: 2px;
+            height: 60px;
             background: linear-gradient(to bottom, #fff, transparent);
             border-radius: 50px;
-            animation: meteorFall 1.5s linear infinite;
-            box-shadow: 0 0 10px #fff;
+            animation: meteorFall 2s linear infinite;
+            will-change: transform;
         }
 
         @keyframes meteorFall {
             0% {
-                transform: translateY(-100px) translateX(0) rotate(45deg);
+                transform: translateY(-100px) rotate(45deg);
                 opacity: 0;
             }
-            10% {
+            20% {
                 opacity: 1;
             }
-            90% {
+            80% {
                 opacity: 1;
             }
             100% {
-                transform: translateY(100vh) translateX(-200px) rotate(45deg);
+                transform: translateY(100vh) rotate(45deg);
                 opacity: 0;
             }
         }
 
         @media (max-width: 768px) {
             .pixel-hello-kitty {
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
             }
             
             .flower-storm {
-                font-size: 2.5rem;
+                font-size: 1.5rem;
             }
             
-            .dimensional-rift {
-                width: 150px;
-                height: 150px;
+            .holographic-border {
+                border-width: 5px;
             }
         }
 
         @media (max-width: 480px) {
             .pixel-hello-kitty {
-                width: 180px;
-                height: 180px;
-            }
-            
-            .flower-storm {
-                font-size: 2rem;
-            }
-            
-            .dimensional-rift {
                 width: 120px;
                 height: 120px;
             }
             
+            .flower-storm {
+                font-size: 1.2rem;
+            }
+            
             .holographic-border {
-                border-width: 10px;
+                border-width: 3px;
             }
         }
     </style>
@@ -460,168 +323,171 @@
             });
         }
 
-        // Kozmik parçacık sistemi
+        // Kozmik parçacık sistemi - Mobil optimizasyonu
         function createCosmicParticles() {
             const container = document.getElementById('cosmicParticles');
+            let particleCount = 0;
+            const maxParticles = window.innerWidth <= 768 ? 15 : 30;
             
             setInterval(() => {
+                if (particleCount >= maxParticles) return;
+                
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = (Math.random() * 8 + 2) + 'px';
-                particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.width = particle.style.height = (Math.random() * 4 + 2) + 'px';
+                particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
                 
-                const colors = ['#fff', '#ff1493', '#00bfff', '#ffd700', '#32cd32', '#9370db'];
-                particle.style.background = `radial-gradient(circle, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
+                const colors = ['#fff', '#ff1493', '#00bfff', '#ffd700'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 
                 container.appendChild(particle);
+                particleCount++;
                 
                 setTimeout(() => {
                     if (particle.parentNode) {
                         particle.parentNode.removeChild(particle);
+                        particleCount--;
                     }
-                }, 6000);
-            }, 100);
+                }, 5000);
+            }, window.innerWidth <= 768 ? 300 : 150);
         }
 
-        // Çiçek fırtınası
+        // Çiçek fırtınası - Mobil optimizasyonu
         function createFlowerStorm() {
-            const flowers = ['🌸', '🌺', '🌻', '🌷', '🌹', '💖', '💕', '💝', '✨', '🌟', '💫', '🎀', '👑', '💎'];
+            const flowers = ['🌸', '🌺', '🌻', '🌷', '💖', '✨', '🌟'];
             const container = document.getElementById('cosmicParticles');
+            let flowerCount = 0;
+            const maxFlowers = window.innerWidth <= 768 ? 8 : 15;
             
             setInterval(() => {
+                if (flowerCount >= maxFlowers) return;
+                
                 const flower = document.createElement('div');
                 flower.className = 'flower-storm';
                 flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
                 flower.style.left = Math.random() * 100 + '%';
-                flower.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                flower.style.animationDelay = Math.random() * 2 + 's';
+                flower.style.animationDuration = (Math.random() * 2 + 3) + 's';
                 
-                // Rastgele renk efekti
-                const colors = ['#ff1493', '#00bfff', '#ffd700', '#32cd32', '#9370db', '#ff69b4'];
+                const colors = ['#ff1493', '#00bfff', '#ffd700', '#32cd32'];
                 flower.style.color = colors[Math.floor(Math.random() * colors.length)];
                 
                 container.appendChild(flower);
+                flowerCount++;
                 
                 setTimeout(() => {
                     if (flower.parentNode) {
                         flower.parentNode.removeChild(flower);
+                        flowerCount--;
                     }
-                }, 7000);
-            }, 200);
+                }, 6000);
+            }, window.innerWidth <= 768 ? 500 : 300);
         }
 
-        // Enerji ışınları
+        // Enerji ışınları - Mobil optimizasyonu
         function createEnergyBeams() {
             const container = document.getElementById('cosmicParticles');
+            let beamCount = 0;
+            const maxBeams = window.innerWidth <= 768 ? 3 : 6;
             
             setInterval(() => {
+                if (beamCount >= maxBeams) return;
+                
                 const beam = document.createElement('div');
                 beam.className = 'energy-beam';
                 beam.style.top = Math.random() * 100 + '%';
-                beam.style.animationDelay = Math.random() * 1 + 's';
                 
                 container.appendChild(beam);
+                beamCount++;
                 
                 setTimeout(() => {
                     if (beam.parentNode) {
                         beam.parentNode.removeChild(beam);
+                        beamCount--;
                     }
-                }, 2000);
-            }, 800);
+                }, 3000);
+            }, window.innerWidth <= 768 ? 2000 : 1200);
         }
 
-        // Boyutsal çatlaklar
-        function createDimensionalRifts() {
-            const container = document.getElementById('cosmicParticles');
-            
-            setInterval(() => {
-                const rift = document.createElement('div');
-                rift.className = 'dimensional-rift';
-                rift.style.left = Math.random() * (window.innerWidth - 200) + 'px';
-                rift.style.top = Math.random() * (window.innerHeight - 200) + 'px';
-                rift.style.animationDelay = Math.random() * 2 + 's';
-                
-                container.appendChild(rift);
-                
-                setTimeout(() => {
-                    if (rift.parentNode) {
-                        rift.parentNode.removeChild(rift);
-                    }
-                }, 6000);
-            }, 3000);
-        }
-
-        // Büyülü aura
+        // Büyülü aura - Mobil optimizasyonu
         function createMagicAuras() {
             const container = document.getElementById('cosmicParticles');
+            let auraCount = 0;
+            const maxAuras = window.innerWidth <= 768 ? 2 : 4;
             
             setInterval(() => {
+                if (auraCount >= maxAuras) return;
+                
                 const aura = document.createElement('div');
                 aura.className = 'magic-aura';
                 aura.style.left = Math.random() * 100 + '%';
                 aura.style.top = Math.random() * 100 + '%';
                 
-                const colors = ['rgba(255, 20, 147, 0.3)', 'rgba(0, 191, 255, 0.3)', 'rgba(255, 215, 0, 0.3)', 'rgba(50, 205, 50, 0.3)'];
+                const colors = ['rgba(255, 20, 147, 0.3)', 'rgba(0, 191, 255, 0.3)', 'rgba(255, 215, 0, 0.3)'];
                 aura.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
                 
                 container.appendChild(aura);
+                auraCount++;
                 
                 setTimeout(() => {
                     if (aura.parentNode) {
                         aura.parentNode.removeChild(aura);
+                        auraCount--;
                     }
-                }, 4000);
-            }, 1500);
+                }, 3000);
+            }, window.innerWidth <= 768 ? 3000 : 2000);
         }
 
-        // Meteor yağmuru
+        // Meteor yağmuru - Mobil optimizasyonu
         function createMeteorShower() {
             const container = document.getElementById('cosmicParticles');
+            let meteorCount = 0;
+            const maxMeteors = window.innerWidth <= 768 ? 5 : 10;
             
             setInterval(() => {
+                if (meteorCount >= maxMeteors) return;
+                
                 const meteor = document.createElement('div');
                 meteor.className = 'meteor-shower';
                 meteor.style.left = Math.random() * 120 + '%';
-                meteor.style.animationDelay = Math.random() * 1 + 's';
                 
-                const colors = ['#fff', '#ff1493', '#00bfff', '#ffd700'];
+                const colors = ['#fff', '#ff1493', '#00bfff'];
                 meteor.style.background = `linear-gradient(to bottom, ${colors[Math.floor(Math.random() * colors.length)]}, transparent)`;
-                meteor.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
                 
                 container.appendChild(meteor);
+                meteorCount++;
                 
                 setTimeout(() => {
                     if (meteor.parentNode) {
                         meteor.parentNode.removeChild(meteor);
+                        meteorCount--;
                     }
-                }, 1500);
-            }, 300);
+                }, 2000);
+            }, window.innerWidth <= 768 ? 800 : 500);
         }
 
-        // Süper dokunma efekti
+        // Süper dokunma efekti - Mobil optimizasyonu
         function createSuperTouchEffect(x, y) {
-            const effects = ['💖', '✨', '🌟', '💫', '🎀', '👑', '💎', '🌸', '🌺', '🦄'];
+            const effects = ['💖', '✨', '🌟', '💫', '🌸'];
             const container = document.getElementById('cosmicParticles');
+            const maxEffects = window.innerWidth <= 768 ? 8 : 15;
             
             // Ana patlama
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < maxEffects; i++) {
                 const effect = document.createElement('div');
                 effect.style.position = 'absolute';
                 effect.style.left = x + 'px';
                 effect.style.top = y + 'px';
-                effect.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+                effect.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
                 effect.style.pointerEvents = 'none';
                 effect.style.zIndex = '25';
                 effect.textContent = effects[Math.floor(Math.random() * effects.length)];
                 
-                const colors = ['#ff1493', '#00bfff', '#ffd700', '#32cd32', '#9370db', '#ff69b4'];
+                const colors = ['#ff1493', '#00bfff', '#ffd700', '#32cd32'];
                 effect.style.color = colors[Math.floor(Math.random() * colors.length)];
-                effect.style.textShadow = `0 0 20px ${effect.style.color}`;
                 
-                const angle = (Math.PI * 2 * i) / 20;
-                const velocity = 2 + Math.random() * 3;
+                const angle = (Math.PI * 2 * i) / maxEffects;
+                const velocity = 1.5 + Math.random() * 2;
                 
                 container.appendChild(effect);
                 
@@ -631,33 +497,42 @@
                     const offsetX = Math.cos(angle) * distance;
                     const offsetY = Math.sin(angle) * distance - (distance * 0.05);
                     
-                    effect.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${1 - distance / 150}) rotate(${distance * 2}deg)`;
-                    effect.style.opacity = Math.max(0, 1 - distance / 120);
+                    effect.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${1 - distance / 100})`;
+                    effect.style.opacity = Math.max(0, 1 - distance / 80);
                     
-                    if (distance < 120) {
+                    if (distance < 80) {
                         requestAnimationFrame(animate);
                     } else {
-                        container.removeChild(effect);
+                        if (effect.parentNode) {
+                            effect.parentNode.removeChild(effect);
+                        }
                     }
                 };
                 
-                setTimeout(() => animate(), i * 20);
+                setTimeout(() => animate(), i * 15);
             }
+        }
+
+        // Boyutsal çatlaklar - Mobilde devre dışı
+        function createDimensionalRifts() {
+            if (window.innerWidth <= 768) return; // Mobilde çalışmasın
             
-            // Aura efekti
-            const aura = document.createElement('div');
-            aura.className = 'magic-aura';
-            aura.style.left = (x - 50) + 'px';
-            aura.style.top = (y - 50) + 'px';
-            aura.style.background = 'radial-gradient(circle, rgba(255, 255, 255, 0.3), transparent)';
-            aura.style.border = '3px solid rgba(255, 20, 147, 0.6)';
-            container.appendChild(aura);
+            const container = document.getElementById('cosmicParticles');
             
-            setTimeout(() => {
-                if (aura.parentNode) {
-                    container.removeChild(aura);
-                }
-            }, 4000);
+            setInterval(() => {
+                const rift = document.createElement('div');
+                rift.className = 'dimensional-rift';
+                rift.style.left = Math.random() * (window.innerWidth - 200) + 'px';
+                rift.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+                
+                container.appendChild(rift);
+                
+                setTimeout(() => {
+                    if (rift.parentNode) {
+                        rift.parentNode.removeChild(rift);
+                    }
+                }, 6000);
+            }, 5000);
         }
 
         // Event listeners
@@ -699,26 +574,54 @@
         `;
         document.head.appendChild(style);
 
-        // Başlangıç
+        // Başlangıç - Mobil optimizasyonu
         window.onload = () => {
+            // Performans kontrolü
+            const isMobile = window.innerWidth <= 768;
+            const isLowEnd = navigator.hardwareConcurrency <= 4;
+            
+            // Temel fonksiyonlar her zaman çalışsın
             createAdvancedPixelArt();
             createCosmicParticles();
-            createFlowerStorm();
-            createEnergyBeams();
-            createDimensionalRifts();
-            createMagicAuras();
-            createMeteorShower();
             
-            // Performans optimizasyonu
+            // Mobilde sınırlı efektler
+            if (!isMobile) {
+                createFlowerStorm();
+                createEnergyBeams();
+                createDimensionalRifts();
+                createMagicAuras();
+                createMeteorShower();
+            } else {
+                // Mobilde sadece temel efektler
+                createFlowerStorm();
+                createEnergyBeams();
+                createMagicAuras();
+                createMeteorShower();
+            }
+            
+            // Performans optimizasyonu - Mobilde daha az sıklıkta
             let lastTime = 0;
+            const targetFPS = isMobile ? 30 : 60;
+            const frameInterval = 1000 / targetFPS;
+            
             function animate(currentTime) {
-                if (currentTime - lastTime > 16) { // 60 FPS
+                if (currentTime - lastTime > frameInterval) {
                     // Animasyon güncellemeleri burada yapılabilir
                     lastTime = currentTime;
                 }
                 requestAnimationFrame(animate);
             }
             requestAnimationFrame(animate);
+            
+            // Batarya ve performans uyarısı
+            if (navigator.getBattery) {
+                navigator.getBattery().then(battery => {
+                    if (battery.level < 0.2) {
+                        console.log('Düşük batarya - Performans azaltıldı');
+                        // Düşük bataryada ek optimizasyonlar
+                    }
+                });
+            }
         };
 
         // Pencere boyutu değişikliği
@@ -726,14 +629,14 @@
             // Responsive ayarlamalar
             const kitty = document.querySelector('.pixel-hello-kitty');
             if (window.innerWidth <= 768) {
+                kitty.style.width = '150px';
+                kitty.style.height = '150px';
+            } else if (window.innerWidth <= 480) {
+                kitty.style.width = '120px';
+                kitty.style.height = '120px';
+            } else {
                 kitty.style.width = '200px';
                 kitty.style.height = '200px';
-            } else if (window.innerWidth <= 480) {
-                kitty.style.width = '180px';
-                kitty.style.height = '180px';
-            } else {
-                kitty.style.width = '250px';
-                kitty.style.height = '250px';
             }
         });
 
